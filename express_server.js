@@ -57,8 +57,8 @@ app.get("/u/:shortURL", (req, res) => {
 app.post("/urls", (req, res) => {
   console.log(req.body); // debug statement to see POST parameters
   var randomData = generateRandomString();
-  urlDatabase[randomData] = req.body["longURL"];
-  res.redirect("/urls/" + randomData); // Respond with 'Ok' (we will replace this)
+  urlDatabase[randomData] = "http://" + req.body["longURL"];
+  res.redirect("/urls/" +  randomData); // Respond with 'Ok' (we will replace this)
 });
 
 app.listen(PORT, () => {

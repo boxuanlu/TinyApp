@@ -10,10 +10,11 @@
     <ul>
 
       <% for (shortURL in urls) {%>
-       <li><%=shortURL%>
+       <li>
         <a href="<%= urls[shortURL]%>" >
-          <%= urls[shortURL]%>
+          <%="http://local:8080/" + shortURL%>
         </a>
+        <%= urls[shortURL]%>
         </li>
         <%}%>
     </ul>
