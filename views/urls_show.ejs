@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TinyApp</title>
+</head>
+<body>
+  <%- include('partials/_header') %>
+<% if (shortURL in urlDatabase) {%>
+    <%= urlDatabase[shortURL] %>
+    <%} else { %>
+    <%= shortURL + "is not in database" %>
+  <%}%>
+</body>
+</html>

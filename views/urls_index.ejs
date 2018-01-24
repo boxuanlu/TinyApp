@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>TinyApp</title>
+</head>
+
+<body>
+  <%- include('partials/_header') %>
+    <ul>
+
+      <% for (shortURL in urls) {%>
+       <li><%=shortURL%>
+        <a href="<%= urls[shortURL]%>" >
+          <%= urls[shortURL]%>
+        </a>
+        </li>
+        <%}%>
+    </ul>
+</body>
+
+</html>
