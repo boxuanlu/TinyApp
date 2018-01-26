@@ -6,9 +6,19 @@
 <body>
   <%- include('partials/_header') %>
 <% if (shortURL in urlDatabase) {%>
-    <%= urlDatabase[shortURL] %>
+    <%= "Short URL  " + shortURL  %>
+    <form action="/urls/<%= shortURL %>" method="POST">
+      <label for="longURL">Upload a URL:</label>
+      <input id="longURL" type="text" name="longURL" placeholder=<%=urlDatabase[shortURL]%> style="width: 300px">
+      <input type="submit" value="Upload"> </form>
+
     <%} else { %>
-    <%= shortURL + "is not in database" %>
+    <%= shortURL + "   is not in database"%>
+
   <%}%>
+
+  <a href="http://localhost:8080/urls" >
+          <%="back to home page"%>
+        </a>
 </body>
 </html>
