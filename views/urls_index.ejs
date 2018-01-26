@@ -12,20 +12,20 @@
 
     </a>
     <% for (shortURL in urls) {%>
-    <li>
-      <a href="<%= urls[shortURL]%>" >
-        <%="http://local:8080/" + shortURL%>
+      <li>
+        <a href="<%= urls[shortURL]["url"]%>" >
+          <%="http://local:8080/" + shortURL%>
 
+          </a>
+          <%= "( " + urls[shortURL]["url"] + " )"%>
+          <form method="POST" action="/urls/<%= shortURL %>/delete">
+            <input type = "submit" value="delete">
+          </form>
+          <a href="http://localhost:8080/urls/<%=shortURL%>">
+            <input type="submit" value="edit">
+          </a>
         </a>
-        <%= "( " + urls[shortURL] + " )"%>
-        <form method="POST" action="/urls/<%= shortURL %>/delete">
-          <input type = "submit" value="delete">
-        </form>
-        <a href="http://localhost:8080/urls/<%=shortURL%>">
-          <input type="submit" value="edite">
-        </a>
-      </a>
-    </li>
+      </li>
     <%}%>
   </ul>
 </body>

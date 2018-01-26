@@ -9,7 +9,7 @@
     <%= "Short URL  " + shortURL  %>
     <form action="/urls/<%= shortURL %>" method="POST">
       <label for="longURL">Upload a URL:</label>
-      <input id="longURL" type="text" name="longURL" placeholder=<%=urlDatabase[shortURL]%> style="width: 300px">
+      <input id="longURL" type="text" name="longURL" placeholder=<%= urlDatabase[shortURL]["url"]%> style="width: 300px">
       <input type="submit" value="Upload"> </form>
 
     <%} else { %>
