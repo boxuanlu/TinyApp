@@ -6,10 +6,15 @@
 <body>
  <%- include('partials/_header') %>
 <form form action="/register" method="POST">
-     <label>email<input id="email" type="email" name="email" ></label>
-     <label>password<input id="password" type="password" name="password" ></label>
+  <label>email<input id="email" type="email" name="email" >
+  </label>
+  <label>password<input id="password" type="password" name="password" >
+  </label>
+  <input type="submit" value="register">
+</form>
+<a href="http://localhost:8080/urls" >
+  <%="back to home page"%>
 
-    <input type="submit" value="register">
-  </form>
+  </a>
 </body>
 </html>

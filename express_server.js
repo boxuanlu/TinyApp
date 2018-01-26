@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 const cookieSession = require('cookie-session');
 app.use(cookieSession({
   name: 'session',
-  keys: ["boxuanlu"/* secret keys */],
+  keys: ["boxuanlu" /* secret keys */ ],
 
   // Cookie Options
   //maxAge: 24 * 60 * 60 * 1000 // 24 hours
@@ -116,6 +116,7 @@ app.get("/urls/:id", (req, res) => {
     res.status(403);
     res.send("user not logged in!");
   }
+  if (req.params.id in urlDatabase){
   if (req.session.user_id === urlDatabase[req.params.id]["userID"]) {
     let templateVars = {
       shortURL: req.params.id,
@@ -126,15 +127,21 @@ app.get("/urls/:id", (req, res) => {
   } else {
     res.status(403);
     res.send("you do not own this short URL!");
+  } } else {
+    res.send("this shortURL is wrong");
   }
 });
 
 // get information from /u/:shortURL(which is a 6 random number);
 app.get("/u/:shortURL", (req, res) => {
-  let longURL = urlDatabase[req.params.shortURL]["url"];
-  let templateVars = { user: users[req.session.user_id] };
+  if (req.params.shortURL in urlDatabase) {
+    let longURL = urlDatabase[req.params.shortURL]["url"];
+    let templateVars = { user: users[req.session.user_id] };
+    res.redirect(longURL);
+  } else {
+    res.send("wrong ShortURL");
+  }
 
-  res.redirect(longURL);
 });
 
 // for creat new web shortURL;
@@ -175,17 +182,17 @@ app.post("/login", (req, res) => {
   let validLogin = false;
   let randomName = "";
   for (key in users) {
-    console.log("2");
-    if (users[key]["email"] === req.body["email"] && bcrypt.compareSync(req.body["password"], users[key]["password"])){
+    //  console.log("2");
+    if (users[key]["email"] === req.body["email"] && bcrypt.compareSync(req.body["password"], users[key]["password"])) {
       validLogin = true;
       randomName = key;
-      console.log("3");
+      //  console.log("3");
     }
   }
   if (!validLogin) {
     res.status(403);
     res.send("wrong information!")
-    res.redirect("/login");
+    res.re("/login");
   } else {
     req.session.user_id = randomName;
     res.redirect("/urls");
@@ -214,11 +221,11 @@ app.post("/register", (req, res) => {
     users[randomname] = {
       "id": randomname,
       "email": req.body["email"],
-      "password": bcrypt.hashSync(req.body["password"],10)
+      "password": bcrypt.hashSync(req.body["password"], 10)
     }
     req.session.user_id = randomname;
-    //res.cookie('user_id', randomname);
-    console.log(users);
+    //res.cookie('user_id', randomname); this is cookie method is not in used now;
+    // console.log(users);
     res.redirect("/urls");
   }
 });
